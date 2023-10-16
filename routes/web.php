@@ -14,15 +14,15 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::resource('posts', PostsController::class);
 
-Route::get('/contact', [PostsController::class, 'contact']);
+//Route::get('/contact', [PostsController::class, 'contact']);
 
-Route::get('/post/{id}/{name}/{city}', [PostsController::class, 'show_post']);
+// Route::get('/post/{id}/{name}/{city}', [PostsController::class, 'show_post']);
 
 // Route::get('/post/{id}', [PostsController::class, 'index']);
 
@@ -42,3 +42,31 @@ Route::get('/post/{id}/{name}/{city}', [PostsController::class, 'show_post']);
 //     $url = route('admin.home');
 //     return "this url is " .$url;
 // }));
+
+/*
+|--------------------------------------------------------------------------
+| RAW SQL
+|--------------------------------------------------------------------------
+*/
+
+// Route::get('/insert', function(){
+//     DB::insert('insert into posts(title, body) values(?,?)', ['PHP with Laravel', 'Laravel is the best thing which have happened.']);
+// });
+
+// Route::get('/read', function(){
+//     $results = DB::select('select * from posts where id=?', [1]);
+
+//     foreach($results as $post){
+//         return $post;
+//     }
+// });
+
+// Route::get('/update', function(){
+//     $updated = DB::update('update posts set title = "Updated title" where id = ?', [1]);
+//     return $updated;
+// });
+
+Route::get('/delete', function(){
+    $deleted = DB::delete('delete from posts where id = ?', [1]);
+    return $deleted;
+});
