@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,89 @@ use App\Http\Controllers\PostsController;
 //     return $updated;
 // });
 
-Route::get('/delete', function(){
-    $deleted = DB::delete('delete from posts where id = ?', [1]);
-    return $deleted;
+// Route::get('/delete', function(){
+//     $deleted = DB::delete('delete from posts where id = ?', [1]);
+//     return $deleted;
+// });
+
+/*
+|--------------------------------------------------------------------------
+| ELOQUENT
+|--------------------------------------------------------------------------
+*/
+
+// Route::get('/read', function(){
+//     $posts = Post::all();
+//     foreach ($posts as $post){
+//         return $post->title;
+//     }
+// });
+
+// Route::get('/find', function(){
+//     $post = Post::find(2);
+//     return $post->title;
+// });
+
+// Route::get('/findwhere', function(){
+//     $posts = Post::where('id', 2)->orderBy('id','desc')->take(1)->get();
+//     return $posts;
+// });
+
+// Route::get('/findmore', function(){
+    // $posts = Post::findOrFail(1);
+    // return $posts;
+
+//     $posts = Post::where('users_count','<',50)->firstOrFail();
+// });
+
+// Route::get('/basicinsert', function(){
+//     $post = new Post();
+//     $post->title = "New ORM title";
+//     $post->body = "ORM";
+//     $post->save();
+// });
+
+// Route::get('/basicinsert', function(){
+//     $post = Post::find(4);
+//     $post->title = "New ORM title";
+//     $post->body = "Cool ORM body";
+//     $post->save();
+// });
+
+// Route::get('/create', function(){
+//     Post::create(['title'=>'The create method 1','body'=>'Im learning 1']);
+// });
+
+// Route::get('/update', function(){
+//     Post::where('id',2)->where('is_admin',0)->update(['title'=>'New title','body'=>'New body']);
+// });
+
+// Route::get('/delete', function(){
+//     $post = Post::find(8);
+//     $post->delete();
+// });
+
+// Route::get('/delete', function(){
+//     Post::destroy([4,5]);
+//     Post::where('is_admin', true)->delete();
+// });
+
+// Route::get('/softdelete', function(){
+//     Post::find(7)->delete();
+// });
+
+// Route::get('/readsoftdelete', function(){
+    // $post = Post::withTrashed()->where('id',6)->get();
+    // return $post;
+
+//     $post = Post::onlyTrashed()->where('is_admin',0)->get();
+//     return $post;
+// });
+
+// Route::get('/restore', function(){
+//     Post::withTrashed()->where('is_admin',0)->restore();
+// });
+
+Route::get('/forcedelete', function(){
+    Post::onlyTrashed()->where('is_admin',0)->forcedelete();
 });
