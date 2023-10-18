@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Models\Post;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,6 +151,30 @@ use App\Models\Post;
 //     Post::withTrashed()->where('is_admin',0)->restore();
 // });
 
-Route::get('/forcedelete', function(){
-    Post::onlyTrashed()->where('is_admin',0)->forcedelete();
+// Route::get('/forcedelete', function(){
+//     Post::onlyTrashed()->where('is_admin',0)->forcedelete();
+// });
+
+/*
+|--------------------------------------------------------------------------
+| ELOQUENT RELATIONSHIPS
+|--------------------------------------------------------------------------
+*/
+
+// // 1-to-1 relationship
+// Route::get('/user/{id}/post', function($id){
+//     return User::find($id)->post->content;
+// });
+
+// // Inverse 1-to-1
+// Route::get('/post/{id}/user', function($id){
+//     return Post::find($id)->user->name;
+// });
+
+// 1-to-Many relationship
+Route::get('/posts', function(){
+    $user = User::find(1);
+    foreach($user->posts as $post ){
+        echo $post->title . ' <br>';
+    }
 });
