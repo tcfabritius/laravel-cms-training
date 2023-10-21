@@ -5,6 +5,7 @@ use App\Http\Controllers\PostsController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Country;
+use App\Models\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -205,16 +206,21 @@ use App\Models\Country;
 //     }
 // });
 
-// Polymorphic relationships
-Route::get('/user/photos', function(){
-    $user = User::find(1);
-    foreach($user->photos as $photo){
-        return $photo->path;
-    }
-});
-Route::get('/post/{id}/photos', function($id){
-    $post = Post::find($id);
-    foreach($post->photos as $photo){
-        echo $photo->path."<br>";
-    }
-});
+// // Polymorphic relationships 1-to-1
+// Route::get('/user/photos', function(){
+//     $user = User::find(1);
+//     foreach($user->photos as $photo){
+//         return $photo->path;
+//     }
+// });
+// Route::get('/post/{id}/photos', function($id){
+//     $post = Post::find($id);
+//     foreach($post->photos as $photo){
+//         echo $photo->path."<br>";
+//     }
+// });
+// Route::get('/photo/{id}/post', function($id){
+//     $photo = Photo::findOrFail($id);
+//     return $photo->imageable;
+// });
+
