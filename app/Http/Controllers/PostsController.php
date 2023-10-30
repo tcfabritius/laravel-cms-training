@@ -11,10 +11,11 @@ class PostsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
         //
-        return "Its working post" . $id;
+        $posts = Post::all();
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -34,6 +35,7 @@ class PostsController extends Controller
         //
         // return $request->get('title');
         Post::create($request->all());
+        return redirect('/posts');
 
         // $input = $request->all();
         // $input['title'] = $request->title;
@@ -50,7 +52,8 @@ class PostsController extends Controller
     public function show(string $id)
     {
         //
-        return "This is the show method.". $id;
+        $post = Post::findOrFail($id);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -59,6 +62,9 @@ class PostsController extends Controller
     public function edit(string $id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'));
+
     }
 
     /**
@@ -67,6 +73,9 @@ class PostsController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+        return redirect('/posts');
     }
 
     /**
@@ -75,6 +84,9 @@ class PostsController extends Controller
     public function destroy(string $id)
     {
         //
+        $post = Post::whereId($id)->delete();
+        //$post->delete();
+        return redirect('/posts');
     }
 
     public function contact()
