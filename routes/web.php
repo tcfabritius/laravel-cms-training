@@ -225,17 +225,25 @@ use App\Models\Tag;
 //     return $photo->imageable;
 // });
 
-// Polymorphic Many-to-Many
-Route::get('/post/tag', function(){
-    $post = Post::find(2);
-    foreach($post->tags as $tag){
-        echo $tag->name;
-    }
-});
+// // Polymorphic Many-to-Many
+// Route::get('/post/tag', function(){
+//     $post = Post::find(2);
+//     foreach($post->tags as $tag){
+//         echo $tag->name;
+//     }
+// });
 
-Route::get('/tag/post', function(){
-    $tag = Tag::find(2);
-    foreach($tag->posts as $post){
-        echo $post->title;
-    }
-});
+// Route::get('/tag/post', function(){
+//     $tag = Tag::find(2);
+//     foreach($tag->posts as $post){
+//         echo $post->title;
+//     }
+// });
+
+/*
+|--------------------------------------------------------------------------
+| CRUD APPLICATION
+|--------------------------------------------------------------------------
+*/
+
+Route::resource('/posts', PostsController::class);
